@@ -87,7 +87,7 @@ class GeoFireCollectionRef {
     String centerHash = center.hash.substring(0, precision);
     List<String> area = GeoFirePoint.neighborsOf(hash: centerHash)
       ..add(centerHash);
-
+    print("PASSOU AQUI");
     Iterable<Stream<List<DistanceDocSnapshot>>> queries = area.map((hash) {
       Query tempQuery = _queryPoint(hash, field);
       return _createStream(tempQuery).map((QuerySnapshot querySnapshot) {
@@ -109,6 +109,7 @@ class GeoFireCollectionRef {
         }
         GeoPoint geoPoint = geoPointField['geopoint'];
         distanceDocSnapshot.distance = center.distance(lat: geoPoint.latitude, lng: geoPoint.longitude);
+        print(distanceDocSnapshot.distance.toString());
         return distanceDocSnapshot;
       });
 
